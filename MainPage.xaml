@@ -1,34 +1,30 @@
-﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CVApp.MainPage">
 
     <StackLayout>
-        <ScrollView>
-            <StackLayout x:Name="fieldsLayout" Spacing="10">
-                <Label Text="Contacto" FontSize="Title" />
-                <Entry Placeholder="Ingrese su información de contacto" />
+        <Label Text="Contacto" FontSize="Title" />
+        <Entry x:Name="contactoEntry" Placeholder="Ingrese su información de contacto" />
 
-                <Label Text="Idiomas" FontSize="Title" />
-                <Editor Placeholder="Ingrese los idiomas que domina" />
+        <Label Text="Idiomas" FontSize="Title" />
+        <Editor x:Name="idiomasEditor" Placeholder="Ingrese sus idiomas" HeightRequest="100" />
 
-                <Label Text="Habilidades" FontSize="Title" />
-                <Editor Placeholder="Ingrese sus habilidades" />
+        <Label Text="Habilidades" FontSize="Title" />
+        <Editor x:Name="habilidadesEditor" Placeholder="Ingrese sus habilidades" HeightRequest="100" />
 
-                <Label Text="Otros intereses" FontSize="Title" />
-                <Editor Placeholder="Ingrese sus otros intereses" />
+        <Label Text="Otros Intereses" FontSize="Title" />
+        <Editor x:Name="interesesEditor" Placeholder="Ingrese sus otros intereses" HeightRequest="100" />
 
-                <Label Text="Perfil" FontSize="Title" />
-                <Editor Placeholder="Ingrese su perfil profesional" />
+        <Label Text="Perfil" FontSize="Title" />
+        <Editor x:Name="perfilEditor" Placeholder="Ingrese su perfil" HeightRequest="200" />
 
-                <Label Text="Experiencia Laboral" FontSize="Title" />
-                <Editor Placeholder="Ingrese su experiencia laboral" />
+        <Label Text="Experiencia Laboral" FontSize="Title" />
+        <Editor x:Name="experienciaEditor" Placeholder="Ingrese su experiencia laboral" HeightRequest="200" />
 
-                <Label Text="Formación" FontSize="Title" />
-                <Editor Placeholder="Ingrese su formación académica" />
-            </StackLayout>
-        </ScrollView>
+        <Label Text="Formación" FontSize="Title" />
+        <Editor x:Name="formacionEditor" Placeholder="Ingrese su formación" HeightRequest="200" />
 
-        <Button Text="Guardar" Clicked="OnSaveClicked" />
+        <Button Text="Guardar CV" Clicked="OnSaveClicked" />
     </StackLayout>
 
 </ContentPage>
