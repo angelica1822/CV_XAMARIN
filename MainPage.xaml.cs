@@ -1,7 +1,8 @@
 using System;
 using Xamarin.Forms;
-using PdfSharp.Pdf;
-using PdfSharp.Drawing;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Tables;
+using MigraDoc.Rendering;
 
 namespace CVApp
 {
@@ -23,35 +24,52 @@ namespace CVApp
             var formacion = ((Editor)fieldsLayout.Children[13]).Text;
 
             // Crear el documento PDF
-            var document = new PdfDocument();
-            var page = document.AddPage();
+            var document = new Document();
+            var section = document.AddSection();
 
-            using (var gfx = XGraphics.FromPdfPage(page))
-            {
-                // Agregar los datos al documento
-                var font = new XFont("Arial", 12);
-                var yPosition = 50;
+            // Crear el grid
+            var grid = section.AddTable();
+            grid.Style = "Table";
+            grid.Borders.Color = Colors.Black;
 
-                gfx.DrawString("Contacto:", font, XBrushes.Black, new XPoint(50, yPosition));
-                gfx.DrawString(contacto, font, XBrushes.Black, new XPoint(150, yPosition));
-                yPosition += 20;
+            // Definir las columnas del grid
+            grid.AddColumn(Unit.FromCentimeter(5));
+            grid.AddColumn(Unit.FromCentimeter(10));
 
-                gfx.DrawString("Idiomas:", font, XBrushes.Black, new XPoint(50, yPosition));
-                gfx.DrawString(idiomas, font, XBrushes.Black, new XPoint(150, yPosition));
-                yPosition += 20;
+            // Agregar filas y celdas al grid
+            AddRow(grid, "Contacto", contacto);
+            AddRow(grid, "Idiomas", idiomas);
+            AddRow(grid, "Habilidades", habilidades);
+            AddRow(grid, "Otros intereses", otrosIntereses);
+            AddRow(grid, "Perfil", perfil);
+            AddRow(grid, "Experiencia Laboral", experienciaLaboral);
+            AddRow(grid, "Formación", formacion);
 
-                gfx.DrawString("Habilidades:", font, XBrushes.Black, new XPoint(50, yPosition));
-                gfx.DrawString(habilidades, font, XBrushes.Black, new XPoint(150, yPosition));
-                yPosition += 20;
-
-                // Continuar agregando los demás campos del CV según tu diseño
-
-                // Guardar el documento en un archivo
-                var filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CV.pdf");
-                document.Save(filePath);
-            }
+            // Guardar el documento en un archivo
+            var filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CV.pdf");
+            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true, PdfFontEmbedding.Always);
+            pdfRenderer.Document = document;
+            pdfRenderer.RenderDocument();
+            pdfRenderer.Save(filePath);
 
             DisplayAlert("Guardado", "El CV se ha generado correctamente.", "OK");
+        }
+
+        private void AddRow(Table table, string labelText, string valueText)
+        {
+            var row = table.AddRow();
+            row.Height = "1cm";
+
+            var labelCell = row.Cells[0];
+            labelCell.Format.Alignment = ParagraphAlignment.Left;
+            labelCell.VerticalAlignment = VerticalAlignment.Center;
+            labelCell.Shading.Color = Colors.LightGray;
+            labelCell.AddParagraph(labelText);
+
+            var valueCell = row.Cells[1];
+            valueCell.Format.Alignment = ParagraphAlignment.Left;
+            valueCell.VerticalAlignment = VerticalAlignment.Center;
+            valueCell.AddParagraph(valueText);
         }
     }
 }
