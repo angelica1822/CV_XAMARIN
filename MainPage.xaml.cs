@@ -23,7 +23,7 @@ namespace CVApp
             string experienciaLaboral = experienciaEditor.Text;
             string formacion = formacionEditor.Text;
 
-            // Crear el contenido del CV
+            
             string cvContent = $"Contacto: {contacto}\n" +
                                $"Idiomas: {idiomas}\n" +
                                $"Habilidades: {habilidades}\n" +
@@ -32,11 +32,11 @@ namespace CVApp
                                $"Experiencia Laboral: {experienciaLaboral}\n" +
                                $"Formación: {formacion}";
 
-            // Guardar el contenido en un archivo temporal
+            
             string filePath = Path.Combine(FileSystem.CacheDirectory, "CV.txt");
             File.WriteAllText(filePath, cvContent);
 
-            // Compartir el archivo como PDF
+         
             await Share.RequestAsync(new ShareFileRequest
             {
                 Title = "Curriculum Vitae",
