@@ -1,0 +1,34 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CVApp.MainPage">
+
+    <StackLayout>
+        <ScrollView>
+            <StackLayout x:Name="fieldsLayout" Spacing="10">
+                <Label Text="Contacto" FontSize="Title" />
+                <Entry Placeholder="Ingrese su información de contacto" />
+
+                <Label Text="Idiomas" FontSize="Title" />
+                <Editor Placeholder="Ingrese los idiomas que domina" />
+
+                <Label Text="Habilidades" FontSize="Title" />
+                <Editor Placeholder="Ingrese sus habilidades" />
+
+                <Label Text="Otros intereses" FontSize="Title" />
+                <Editor Placeholder="Ingrese sus otros intereses" />
+
+                <Label Text="Perfil" FontSize="Title" />
+                <Editor Placeholder="Ingrese su perfil profesional" />
+
+                <Label Text="Experiencia Laboral" FontSize="Title" />
+                <Editor Placeholder="Ingrese su experiencia laboral" />
+
+                <Label Text="Formación" FontSize="Title" />
+                <Editor Placeholder="Ingrese su formación académica" />
+            </StackLayout>
+        </ScrollView>
+
+        <Button Text="Guardar" Clicked="OnSaveClicked" />
+    </StackLayout>
+
+</ContentPage>
